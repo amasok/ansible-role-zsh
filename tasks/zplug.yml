@@ -1,0 +1,10 @@
+---
+- name: Download zplug
+  get_url: url=https://raw.githubusercontent.com/zplug/installer/master/installer.zsh dest=/tmp/zplug.sh
+  register: download_zplug
+
+- name: Install zplug
+  shell: zsh /tmp/zplug.sh
+  become: no
+  when: download_zplug.changed
+
