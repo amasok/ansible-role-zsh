@@ -1,6 +1,7 @@
 ---
+# tasks file for ansible-role-zsh
 
-- name: install zsh packages
+- name: Install zsh packages
   become: yes
   apt: pkg={{ item }} state=installed
   tags: [packages]
@@ -14,12 +15,12 @@
   become: yes
   user: name=vagrant shell=/usr/bin/zsh
 
-# ============ peco ===========
+# ============ peco ============
 - include: peco.yml
-# ============ zplug ===========
+# ============ zplug ============
 - include: zplug.yml
 
-- name: set template .zsh file to vagrant home
+- name: Set template .zsh file to vagrant home
   template: src=zshrc.j2 dest=~vagrant/.zshrc owner=vagrant group=vagrant mode="u=rw,g=r,o=r"
 #
 # - name: source ~/.zshrc
