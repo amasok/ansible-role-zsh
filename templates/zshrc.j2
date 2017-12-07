@@ -65,7 +65,6 @@ fi
 # ------------------------------------
 alias clip="nc localhost 8377"
 
-
 # ------------------------------------
 # oh-ma-yzshからテーマを設定
 # ------------------------------------
@@ -132,4 +131,5 @@ setopt share_history
 setopt hist_ignore_dups
 # 重複するコマンドは古い法を削除する
 setopt hist_ignore_all_dups
-
+# ssh-add
+eval "$(ssh-agent)"
