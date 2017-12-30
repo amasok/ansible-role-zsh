@@ -1,0 +1,25 @@
+---
+- name: Install zsh packages
+  become: yes
+  apt: pkg={{ item }} state=installed
+  tags: [packages]
+  with_items:
+    - build-essential
+    - zsh
+    - git
+    - curl
+
+- name: Set zsh as default shell
+  become: yes
+  user: name= "{{ user.name }}" shell=/usr/bin/zsh
+  when: "{{ user.name }}"
+
+# ============ peco ============
+- import_tasks: "Debian/peco.yml"
+
+# ============ zplug ============
+- import_tasks: "Debian/zplug.yml"
+
+- name: Set template .zsh file to vagrant home
+  become: no
+  template: src=zshrc.j2 dest=~/.zshrc mode="u=rw,g=r,o=r"

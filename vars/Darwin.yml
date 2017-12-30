@@ -1,0 +1,15 @@
+---
+homebrew_packages:
+  - readline
+  - openssl
+  - git
+  - peco
+  - zsh
+  - zsh-completions
+  - zsh-syntax-highlighting
+  - zplug
+  - tree
+  - icdiff
+  - libevent
+  - libyaml
+  - wget

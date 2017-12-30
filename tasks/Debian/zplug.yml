@@ -7,4 +7,3 @@
   shell: zsh /tmp/zplug.sh
   become: no
   when: download_zplug.changed
-
