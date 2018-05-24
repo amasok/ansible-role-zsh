@@ -1,9 +1,12 @@
 ---
 - name: Download zplug
+  become: yes
+  become_user: "{{ user.name }}"
   get_url: url=https://raw.githubusercontent.com/zplug/installer/master/installer.zsh dest=/tmp/zplug.sh
   register: download_zplug
 
 - name: Install zplug
+  become: yes
+  become_user: "{{ user.name }}"
   shell: zsh /tmp/zplug.sh
-  become: no
   when: download_zplug.changed

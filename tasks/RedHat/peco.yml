@@ -1,24 +1,31 @@
 ---
 
 - name: Get latest peco version
+  become: yes
+  become_user: "{{ user.name }}"
   shell: >
     curl -sI https://github.com/peco/peco/releases/latest | awk -F'/' '/^Location:/{print $NF}'
   register: peco_latest_version
 
 - name: Download latest peco
+  become: yes
+  become_user: "{{ user.name }}"
   get_url: url=https://github.com/peco/peco/releases/download/{{ peco_latest_version.stdout }}/peco_linux_amd64.tar.gz dest=/tmp/peco_linux_amd64.tar.gz
   register: download_peco
 
 - name: Extract peco
-  when: download_peco.changed
+  become: yes
+  become_user: "{{ user.name }}"
   command: tar zxvf /tmp/peco_linux_amd64.tar.gz chdir=/tmp/
 
 - name: Copy to /usr/bin/
-  when: download_peco.changed
+  become: yes
+  become_user: root
   command: cp /tmp/peco_linux_amd64/peco /usr/bin/
 
 - name: chmod peco
-  when: download_peco.changed
+  become: yes
+  become_user: "{{ user.name }}"
   file:
     path: /usr/bin/peco
     mode: 0755

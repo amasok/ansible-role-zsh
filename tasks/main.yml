@@ -1,13 +1,11 @@
 ---
-# tasks file for ansible-role-zsh
-#
-# - name: source ~/.zshrc
-#   shell: source ~/.zshrc
-#   become: no
-#
-# tasks file for zabbix-agent
 - name: Add the OS specific varibles
   include_vars: "{{ ansible_os_family }}.yml"
 
 # (setup)  specific tasks
-- import_tasks: "{{ ansible_os_family }}/setup.yml"
+- include: "RedHat/setup.yml"
+  when: ansible_os_family == 'RedHat'
+
+# (setup)  specific tasks
+- include: "Debian/setup.yml"
+  when: ansible_os_family == 'Debian'
